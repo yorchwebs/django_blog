@@ -1,15 +1,18 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>{% block title %}{% endblock %}</title>
-        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
-    </head>
-    <body>
-        <div id="content">{% block content %} {% endblock %}</div>
-        <div id="sidebar">
-            <h2>My blog</h2>
-            <p>This is my blog.</p>
-        </div>
-    </body>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="sidebar">
+    <h2>Snake Code</h2>
+    <p>Blog specialized in Python and its Frameworks, Databases, and Programming.</p>
+  </div>
+</body>
 </html>
