@@ -1,3 +1,5 @@
+"""URL Configuration for the blog app."""
+
 from django.urls import path
 
 from . import views
