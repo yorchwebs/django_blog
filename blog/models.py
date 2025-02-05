@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -59,7 +60,7 @@ class Post(models.Model):
         PUBLISHED = "PB", "Published"
 
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=250, unique_for_date="-publish")
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -105,3 +106,24 @@ class Post(models.Model):
         :return: str
         """
         return self.title
+
+    def get_absolute_url(self):
+        """
+        Return the URL of the post detail page.
+
+        Usage:
+        >>> from blog.models import Post
+        >>> post = Post.objects.first()
+        >>> post.get_absolute_url() '/blog/1/'
+
+        :return: str
+        """
+        return reverse(
+            "blog:post_detail",
+            args=[
+                self.publish.year,
+                self.publish.month,
+                self.publish.day,
+                self.slug,
+            ],
+        )
