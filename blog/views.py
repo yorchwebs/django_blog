@@ -17,7 +17,7 @@ def post_list(request):
     return render(request, "post/list.html", {"posts": posts})
 
 
-def post_detail(request, id):
+def post_detail(request, year, month, day, post):
     """
     Display a single post.
 
@@ -27,5 +27,12 @@ def post_detail(request, id):
 
     :return: HttpResponse object
     """
-    post = get_object_or_404(Post, id=id, status=Post.Status.PUBLISHED)
+    post = get_object_or_404(
+        Post,
+        status=Post.Status.PUBLISHED,
+        slug=post,
+        publish__year=year,
+        publish__month=month,
+        publish__day=day,
+    )
     return render(request, "post/detail.html", {"post": post})
